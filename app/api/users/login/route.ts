@@ -37,7 +37,7 @@ export async function POST(req : NextRequest) {
             id: user._id,
         }
 
-        const token = await jwt.sign(token_paylod, process.env.TOKEN_SECRET!, {expiresIn: '1h'})
+        const token = jwt.sign(token_paylod, process.env.TOKEN_SECRET!, {expiresIn: '1h'})
 
         const response = NextResponse.json({
             message : "logged in successfully",
@@ -50,8 +50,12 @@ export async function POST(req : NextRequest) {
 
         return response;
 
-    }catch(Err : any) {
-        return NextResponse.json({error: Err.message}, {status : 500});
+    } catch (err: unknown) {
+    if (err instanceof Error) {
+        return NextResponse.json({ error: err.message }, { status: 500 });
+    } else {
+        return NextResponse.json({ error: "An unknown error occurred." }, { status: 500 });
     }
 }
+
 
