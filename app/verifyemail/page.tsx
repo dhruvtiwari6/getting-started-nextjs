@@ -1,7 +1,7 @@
 'use client'
 
 import React, { Suspense } from 'react'
-import VerifyEmail from './VerifyEmail'
+import VerifyEmail from './verifyemail'
 
 export default function Page() {
   return (
